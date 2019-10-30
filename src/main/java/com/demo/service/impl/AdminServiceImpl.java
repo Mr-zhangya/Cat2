@@ -20,6 +20,9 @@ public class AdminServiceImpl implements AdminService {
         admin.setPassword(password);
 
         int count = adminMapper.selectAdminByUserNameAndPassword(admin);
-        return R.setOK(count);
+        if (count == 1) {
+            return R.setOK(count);
+        }
+        return R.setERROR();
     }
 }
