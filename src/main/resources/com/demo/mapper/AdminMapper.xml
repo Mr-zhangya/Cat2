@@ -3,7 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mapper.AdminMapper">
+    <update id="updateNewPassword" parameterType="adminVo">
+        update admin set password=#{newPassword} where username=#{username} and password=#{oldPassword}
+    </update>
     <select id="selectAdminByUserNameAndPassword" parameterType="admin" resultType="int">
         select count(1) from admin where username=#{username} and password = #{password}
     </select>
+    <select id="selectAdminByUserNameAndOldPassword" resultType="java.lang.Integer">
+        select count(1) from admin where username=#{username} and password = #{oldPassword}
+    </select>
+
+    <insert id="addAdmin" parameterType="admin">
+        insert into admin (username, password) values (#{username}, #{password})
+    </insert>
 </mapper>
